@@ -39,3 +39,27 @@ function daoNguocSo() {
     document.getElementById("kq_ex2").innerHTML = 'Kết quả đảo ngược: ' +  numInput2;
 
 }
+
+function ketHopChuoi() {
+    let strInput3 = document.getElementById('input_ex3').value;
+    strInput3 = strInput3.split("");
+    // console.log(typeof(strInput3));
+    // alert(strInput3.length);
+    let strResult= [];
+    let index = 0;
+    for (let i = 0; i < strInput3.length; i++) {
+        for (let j = i; j < strInput3.length; j++) {
+            if(j === i){
+                strResult[index] = strInput3[i];
+            } else{
+                // console.log(strResult[index]);
+                // console.log(strInput3[j]);
+                strResult[index] = strResult[index-1] + strInput3[j];
+            }
+            index++;
+        }
+    }
+    // console.log(strResult);
+    document.getElementById('kq_ex3').innerHTML = 'Kết quả kết hợp chuỗi: ' + strResult.toString();
+    
+}
