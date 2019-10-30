@@ -31,3 +31,11 @@ function ktSoNguyenTo() {
     }   
 }
 
+function daoNguocSo() {
+    let numInput2 = document.getElementById('input_ex2').value;
+    // console.log(typeof(numInput2));
+    numInput2 = numInput2.split("").reverse().join("");
+    // alert(typeof(numInput2));
+    document.getElementById("kq_ex2").innerHTML = 'Kết quả đảo ngược: ' +  numInput2;
+
+}
