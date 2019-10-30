@@ -1,7 +1,7 @@
 
 function ktSoNguyenTo() {
     let numInput = document.getElementById('input_ex1').value;
-    
+
     //Ham kt so nguyen to voi buoc nhay 2
     function laSoNguyenTo2(numInput) {
         // Neu n < 2 thi khong phai la SNT
@@ -24,11 +24,11 @@ function ktSoNguyenTo() {
         }
         return true;
     }
-    if(laSoNguyenTo2(numInput)){
+    if (laSoNguyenTo2(numInput)) {
         document.getElementById("kq_ex1").innerHTML = 'Kết quả kiểm tra: Là số nguyên tố';
-    } else{
+    } else {
         document.getElementById("kq_ex1").innerHTML = 'Kết quả kiểm tra: Không là số nguyên tố';
-    }   
+    }
 }
 
 function daoNguocSo() {
@@ -36,7 +36,7 @@ function daoNguocSo() {
     // console.log(typeof(numInput2));
     numInput2 = numInput2.split("").reverse().join("");
     // alert(typeof(numInput2));
-    document.getElementById("kq_ex2").innerHTML = 'Kết quả đảo ngược: ' +  numInput2;
+    document.getElementById("kq_ex2").innerHTML = 'Kết quả đảo ngược: ' + numInput2;
 
 }
 
@@ -46,45 +46,62 @@ function ketHopChuoi() {
     strInput3 = strInput3.split("");
     // console.log(typeof(strInput3));
     // alert(strInput3.length);
-    let strResult= [];
+    let strResult = [];
     let index = 0;
     for (let i = 0; i < strInput3.length; i++) {
         for (let j = i; j < strInput3.length; j++) {
-            if(j === i){
+            if (j === i) {
                 strResult[index] = strInput3[i];
-            } else{
+            } else {
                 // console.log(strResult[index]);
                 // console.log(strInput3[j]);
-                strResult[index] = strResult[index-1] + strInput3[j];
+                strResult[index] = strResult[index - 1] + strInput3[j];
             }
             index++;
         }
     }
     // console.log(strResult);
     document.getElementById('kq_ex3').innerHTML = 'Kết quả kết hợp chuỗi: ' + strResult.toString();
-    
+
 }
 
 function lanXuatHien() {
     let strInput4 = document.getElementById('input_ex4').value;
     strInput4 = strInput4.replace(/\s/g, '');
-
+    strInput4KhongLap = chuoiKhongLapLai(strInput4); //tao chuoi khong co chu lap lai
+    strInput4ArrKhongLap = strInput4KhongLap.split(''); //tao mang khong co gia tri lap
     strInput4Arr = strInput4.split("");
-    let tmpArr = []; //mang k co ky tu trung lap
+    let tmpArr = [];
     let result = 'Số lần xuất hiện: ';
-    for (let i = 0; i < strInput4Arr.length; i++) {
-        tmpArr.forEach(element => {
-            if(element == strInput4Arr[i]){
-                return
-            } else{
-                tmpArr.push(strInput4Arr[i]);
-            }
-        });
-        console.log(tmpArr);
-        let solan = (strInput4.match(new RegExp(strInput4Arr[i], "g")) || []).length;
-        result = result + '<br>' + strInput4Arr[i] + " ----> " + solan + " lần";
+
+    /* 
+        Lặp mảng các ký tự không lặp{
+            số lần lặp của các ký tự = các ký tự trong mảng không lặp (strInput4ArrKhongLap[i]) MATCH với chuỗi có chứa các ký tự lặp (strInput4)
+        }
+        
+    */
+    for (let i = 0; i < strInput4ArrKhongLap.length; i++) {
+        let soLanLapKyTu = (strInput4.match(new RegExp(strInput4ArrKhongLap[i], "g")) || []).length;
+        result = result + '<br>' + strInput4ArrKhongLap[i] + " ----> " + soLanLapKyTu + " lần";
+       
     }
-    // console.log(strInput4);
-    console.log(tmpArr);
     document.getElementById('kq_ex4').innerHTML = result;
+}
+
+function chuoiKhongLapLai(str = '') {
+
+    /* 
+        Tạo chuỗi mới không có phần tử lặp lại :
+        split('') : chuyển chuổi sang array để reduce. (tạm gọi là array Y)
+
+        reduce: sẽ trả về total. hàm có 2 đối số là 1 hàm (total, curent) và 1 mảng rỗng []
+            mảng rỗng [] ở đây sẽ đưa vào total lần chạy đầu tiên.
+
+            total.find : sẽ trả về giá trị (value) của phần tử đầu tiên trong mảng (total) thỏa mãn chức năng kiểm tra được cung cấp hoặc undefined. 
+                Chức năng kiểm tra ở đây là: find sẽ duyệt qua mỗi value của total. (ổ đây là a) rồi lấy giá trị a để so sánh với current (giá trị đầu của array Y). Nếu thõa thì total = total, còn không thì total sẽ bằng [...total, current]  (mảng mới, có giá trị của total cũ và thêm vào giá trị current.)
+        join: tạo lại chuỗi từ mảng.
+    */
+    return str.split('').reduce((total, current) =>
+        total.find((a) => a === current) !== undefined ? total : [...total, current]
+        , []).join('')
 }
