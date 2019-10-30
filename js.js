@@ -42,6 +42,7 @@ function daoNguocSo() {
 
 function ketHopChuoi() {
     let strInput3 = document.getElementById('input_ex3').value;
+    strInput3 = strInput3.replace(/\s/g, '');
     strInput3 = strInput3.split("");
     // console.log(typeof(strInput3));
     // alert(strInput3.length);
@@ -62,4 +63,28 @@ function ketHopChuoi() {
     // console.log(strResult);
     document.getElementById('kq_ex3').innerHTML = 'Kết quả kết hợp chuỗi: ' + strResult.toString();
     
+}
+
+function lanXuatHien() {
+    let strInput4 = document.getElementById('input_ex4').value;
+    strInput4 = strInput4.replace(/\s/g, '');
+
+    strInput4Arr = strInput4.split("");
+    let tmpArr = []; //mang k co ky tu trung lap
+    let result = 'Số lần xuất hiện: ';
+    for (let i = 0; i < strInput4Arr.length; i++) {
+        tmpArr.forEach(element => {
+            if(element == strInput4Arr[i]){
+                return
+            } else{
+                tmpArr.push(strInput4Arr[i]);
+            }
+        });
+        console.log(tmpArr);
+        let solan = (strInput4.match(new RegExp(strInput4Arr[i], "g")) || []).length;
+        result = result + '<br>' + strInput4Arr[i] + " ----> " + solan + " lần";
+    }
+    // console.log(strInput4);
+    console.log(tmpArr);
+    document.getElementById('kq_ex4').innerHTML = result;
 }
