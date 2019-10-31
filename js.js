@@ -111,7 +111,7 @@ function phanTuLonHon() {
     let strInput5 = document.getElementById('input_ex5').value.replace(/\s/g, '');
     let strInput5So = document.getElementById('input_ex5_so').value;
     strInput5Arr = strInput5.split(',');
-    console.log(strInput5Arr);
+    // console.log(strInput5Arr);
     // Tao mang moi thoa man dieu kien chi toan so.
     strInput5Arr = strInput5Arr.map(
         function (elem) {
@@ -129,7 +129,7 @@ function phanTuLonHon() {
             return elem;
         }
     );
-    console.log(strInput5Arr);
+    // console.log(strInput5Arr);
 
     // Thuc hien viec so sanh voi 1 so de tra ve mang cac phan tu lon hon
     let result = strInput5Arr.filter(
