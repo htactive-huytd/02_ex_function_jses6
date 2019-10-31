@@ -142,3 +142,16 @@ function phanTuLonHon() {
     document.getElementById('kq_ex5').innerHTML = 'Mảng mới là: ' + '[ ' + result + ' ]';
 
 }
+
+function soLanKyTuOChuoi(str, kt) {
+    return str.split(kt).length - 1;
+}
+
+function kyTuXuatHien() {
+    let strInput = document.getElementById('input_ex6').value;
+    let ktInput = document.getElementById('input_ex6_kt').value;
+    let result = soLanKyTuOChuoi(strInput, ktInput);
+    
+    document.getElementById('kq_ex6').innerHTML = ktInput + ' xuất hiện: '+ result + ' lần';
+}
+
