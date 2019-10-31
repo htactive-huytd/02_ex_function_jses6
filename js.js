@@ -83,7 +83,7 @@ function lanXuatHien() {
     for (let i = 0; i < strInput4ArrKhongLap.length; i++) {
         let soLanLapKyTu = (strInput4.match(new RegExp(strInput4ArrKhongLap[i], "g")) || []).length;
         result = result + '<br>' + strInput4ArrKhongLap[i] + " ----> " + soLanLapKyTu + " lần";
-       
+
     }
     document.getElementById('kq_ex4').innerHTML = result;
 }
@@ -104,4 +104,41 @@ function chuoiKhongLapLai(str = '') {
     return str.split('').reduce((total, current) =>
         total.find((a) => a === current) !== undefined ? total : [...total, current]
         , []).join('')
+}
+
+
+function phanTuLonHon() {
+    let strInput5 = document.getElementById('input_ex5').value.replace(/\s/g, '');
+    let strInput5So = document.getElementById('input_ex5_so').value;
+    strInput5Arr = strInput5.split(',');
+    console.log(strInput5Arr);
+    // Tao mang moi thoa man dieu kien chi toan so.
+    strInput5Arr = strInput5Arr.map(
+        function (elem) {
+            if (isNaN(elem)) {
+                return elem.split("").map(
+                    function (x) {
+                        if(isNaN(x)){
+                            
+                        } else{
+                            return x;
+                        }
+                    }
+                ).join("")
+            }
+            return elem;
+        }
+    );
+    console.log(strInput5Arr);
+
+    // Thuc hien viec so sanh voi 1 so de tra ve mang cac phan tu lon hon
+    let result = strInput5Arr.filter(
+        function (x) {
+            
+            if (x > Number(strInput5So))
+                return x;
+        }
+    );
+    document.getElementById('kq_ex5').innerHTML = 'Mảng mới là: ' + '[ ' + result + ' ]';
+
 }
