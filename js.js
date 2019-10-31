@@ -118,9 +118,9 @@ function phanTuLonHon() {
             if (isNaN(elem)) {
                 return elem.split("").map(
                     function (x) {
-                        if(isNaN(x)){
-                            
-                        } else{
+                        if (isNaN(x)) {
+
+                        } else {
                             return x;
                         }
                     }
@@ -134,7 +134,7 @@ function phanTuLonHon() {
     // Thuc hien viec so sanh voi 1 so de tra ve mang cac phan tu lon hon
     let result = strInput5Arr.filter(
         function (x) {
-            
+
             if (x > Number(strInput5So))
                 return x;
         }
@@ -151,7 +151,53 @@ function kyTuXuatHien() {
     let strInput = document.getElementById('input_ex6').value;
     let ktInput = document.getElementById('input_ex6_kt').value;
     let result = soLanKyTuOChuoi(strInput, ktInput);
-    
-    document.getElementById('kq_ex6').innerHTML = ktInput + ' xuất hiện: '+ result + ' lần';
+
+    document.getElementById('kq_ex6').innerHTML = ktInput + ' xuất hiện: ' + result + ' lần';
 }
 
+function kyTuDauKhongLap() {
+    let strInput7 = document.getElementById('input_ex7').value;
+    let result = firstNonRepeatedCharacter(strInput7);
+    if (result !== null) {
+        document.getElementById('kq_ex7').innerHTML = 'Ký tự đầu không lặp là: ' + result;
+    } else {
+        document.getElementById('kq_ex7').innerHTML = "Không tốn tại ký tự không lặp";
+    }
+
+
+}
+
+/*
+    Ham firstNonRepeatedCharacter tim ky tu dau tien khong lap lai trong str
+    ví dụ:
+    str = 'abac';
+    i = 0   kt =a
+            (0 == 0) && (2 == -1)
+
+    i = 1   kt =b
+            (1 == 1) && (-1 == -1)
+
+
+    str = 'aabc';
+    firstNonRepeatedCharacter(str);
+    i = 0   kt = a
+            (0 == 0) && (1 == -1)  false
+
+    i = 1   kt = a
+            (0 == 1)&&(-1==-1)    false
+
+    i = 2   kt =b
+            (2 == 2)&&(-1 == -1)   true
+            => b
+
+    
+*/
+function firstNonRepeatedCharacter(string) {
+    for (let i = 0; i < string.length; i++) {
+        let kt = string.charAt(i);
+        if (string.indexOf(kt) == i && string.indexOf(kt, i + 1) == -1) {
+            return kt;
+        }
+    }
+    return null;
+}
